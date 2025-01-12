@@ -59,7 +59,7 @@ if(!$s->loggedIn || $_GET['logout'])
 	}
 }
 ?>
-<div id="mainDisplay" ></div><span id=""> Graphics Done by Fraehr</span><br><a href="http://www.icra.org/sitelabel/" target="_blank"><img src="images/icra.gif"></a></td>
+<div id="mainDisplay" ></div><span id=""> Graphics Done by test</span><br><a href="http://www.icra.org/sitelabel/" target="_blank"><img src="images/icra.gif"></a></td>
     <td colspan="2"></td>
   </tr>
   
