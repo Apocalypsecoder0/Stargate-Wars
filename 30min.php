@@ -1,17 +1,18 @@
 <?
 include_once("config.php");
+include_once("Universe.php");
+include_once("Galaxy.php");
+include_once("Planet.php");
 error_log("30min.php script executed.");
-$s = new Game();
-try {
-    $s->updateResources(); // New function from OGame
-    $s->checkFleetStatus(); // New function from OGame
-} catch (Exception $e) {
-    error_log("Error executing OGame functions: " . $e->getMessage());
+$universe = new Universe();
+foreach ($universe->getGalaxies() as $galaxyData) {
+    $galaxy = new Galaxy($galaxyData['name']);
+    foreach ($galaxy->getPlanets() as $planetData) {
+        $planet = new Planet($planetData['name']);
+        // Simulate updates or interactions with planets
+        error_log("Updating planet: " . $planet->getName());
+    }
 }
-if($s->turnUpdate())
-{
-	echo "Successful<br>";
-	echo $s->queryCount;
-	
-}
+
+error_log("Universe state updated.");
 ?>

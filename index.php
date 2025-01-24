@@ -1,5 +1,8 @@
 <?php
 include_once("config.php");
+include_once("Universe.php");
+include_once("Galaxy.php");
+include_once("Planet.php");
 $s = new Game();
 if ($_GET['logout']) { User::logOut();} 
 if($_POST['submit']=="Login")
@@ -61,7 +64,18 @@ if(!$s->loggedIn || $_GET['logout'])
 	}
 }
 ?>
-<div id="mainDisplay" ></div><span id=""> Graphics Done by test</span><br><a href="http://www.icra.org/sitelabel/" target="_blank"><img src="images/icra.gif"></a></td>
+<div id="mainDisplay">
+    <?php
+    $universe = new Universe();
+    foreach ($universe->getGalaxies() as $galaxyData) {
+        echo "<h3>" . $galaxyData['name'] . "</h3>";
+        foreach ($galaxyData['planets'] as $planetData) {
+            echo "<p>Planet: " . $planetData['name'] . " - Type: " . $planetData['type'] . " - Moons: " . $planetData['moons'] . "</p>";
+        }
+    }
+    ?>
+</div>
+<span id=""> Graphics Done by test</span><br><a href="http://www.icra.org/sitelabel/" target="_blank"><img src="images/icra.gif"></a></td>
     <td colspan="2"></td>
   </tr>
   
