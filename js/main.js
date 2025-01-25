@@ -22,12 +22,17 @@ if (( ev.keyCode >= 48 && ev.keyCode <= 57 )
     // Response function:
     httpreq.onreadystatechange = function () {
       if (httpreq.readyState == 4) {
-		var resp = httpreq.responseText;
-	  	var obj = eval(resp);
-        var suggestion = obj[0];
-		var userID = document.getElementById ('userID2');         
-		userID.value = obj[1];
-        var toUser = document.getElementById ('toUser1');         
+        if (httpreq.status == 200) {
+          var resp = httpreq.responseText;
+          var obj = eval(resp);
+          var suggestion = obj[0];
+          var userID = document.getElementById ('userID2');         
+          userID.value = obj[1];
+          var toUser = document.getElementById ('toUser1');         
+        } else {
+          console.error("Error during AJAX request: " + httpreq.statusText);
+          alert("An error occurred while processing your request. Please try again.");
+        }
 
         if ((suggestion) && (toUser.value == original_text)) {
 	   // Firefox and Opera
@@ -102,9 +107,10 @@ function handleResponse(){
         } else {
             alert("A problem occurred with communicating between the XMLHttpRequest object and the server program.");
         }
-    }//end outer if
-	
-	
+    } else {
+        console.error("Error during AJAX request: " + request.statusText);
+        alert("An error occurred while processing your request. Please try again.");
+    }
 }
 
 function initReq(reqType,url,bool){

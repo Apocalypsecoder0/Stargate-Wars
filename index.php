@@ -1,10 +1,18 @@
 <?
 include_once("config.php");
-$s = new Game();
+try {
+    $s = new Game();
+} catch (Exception $e) {
+    error_log("Database connection error: " . $e->getMessage());
+    die("Database connection failed. Please try again later.");
+}
 if ($_GET['logout']) { User::logOut();} 
 if($_POST['submit']=="Login")
 {
-        $s = new User($_POST['user'], $_POST['pass']);
+    $username = $_POST['user'];
+    $s = new User($username, $_POST['pass']);
+    $loginStatus = $s->loggedIn ? "success" : "failure";
+    error_log("Login attempt by user: $username at " . date('Y-m-d H:i:s') . " with status: $loginStatus");
 }
 
 if(!$s->loggedIn || $_GET['logout'])
