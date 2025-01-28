@@ -97,6 +97,8 @@ function handleResponse(){
     if(request.readyState == 4){
         if(request.status == 200){
            var doc = request.responseText;
+           console.log("Response Text:", doc);
+           console.log("Status:", request.status);
             stylizeDiv(doc,document.getElementById("mainDisplay"));
 			 queryString="";
         } else {

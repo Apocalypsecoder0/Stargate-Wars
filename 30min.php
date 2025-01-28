@@ -3,7 +3,7 @@ include_once("config.php");
 include_once("Universe.php");
 include_once("Galaxy.php");
 include_once("Planet.php");
-error_log("30min.php script executed.");
+Debug::printMsg("30min.php", "execute", "Script execution started.");
 $universe = new Universe();
 foreach ($universe->getGalaxies() as $galaxyData) {
     $galaxy = new Galaxy($galaxyData['name']);
@@ -14,5 +14,5 @@ foreach ($universe->getGalaxies() as $galaxyData) {
     }
 }
 
-error_log("Universe state updated.");
+Debug::printMsg("30min.php", "execute", "Script execution ended.");
 ?>

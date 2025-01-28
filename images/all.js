@@ -13,6 +13,8 @@ function handleResponse(){
     if(request.readyState == 4){
         if(request.status == 200){
            var doc = request.responseText;
+           console.log("Response Text:", doc);
+           console.log("Status:", request.status);
            stylizeDiv(doc,document.getElementById("mainDisplay"));
         } else {
             alert("A problem occurred with communicating between the XMLHttpRequest object and the server program.");
@@ -77,6 +79,8 @@ function autoHandle(){
     if(auto.readyState == 4){
         if(auto.status == 200){
             var resp = auto.responseText; //Retrieve PHP Output
+            console.log("Response Text:", resp);
+            console.log("Status:", auto.status);
 			//alert(resp);
             var obj = eval(resp); //Evaluates the PHP Output as an Arrary
 			//Sets the DIV s To the autoloaded stuff every (thenumberyouenters / 1000) seconds

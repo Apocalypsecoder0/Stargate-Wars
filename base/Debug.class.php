@@ -1,5 +1,6 @@
 <?php
 // Base::Debug.class.php
+define('DEBUG', true);
 class Debug
 {
 	function printMsg($className, $function, $message)
