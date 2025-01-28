@@ -4,6 +4,18 @@ Part to replace:
 define('OGAME_API_KEY', 'your_actual_api_key'); // Updated OGame API key
 define('RESOURCE_UPDATE_INTERVAL', 30); // Verified constant for resource update interval in minutes
 define('DEFAULT_NUM_GALAXIES', 5); // Default number of galaxies
+
+// Initial resource amounts
+define('INITIAL_METAL', 5000);
+define('INITIAL_CRYSTAL', 3000);
+define('INITIAL_DEUTERIUM', 2000);
+
+// Research costs
+define('RESEARCH_COSTS', [
+    'technology1' => ['metal' => 1000, 'crystal' => 500, 'deuterium' => 200],
+    'technology2' => ['metal' => 2000, 'crystal' => 1000, 'deuterium' => 400],
+    // Add more technologies as needed
+]);
 define('DEFAULT_NUM_SOLAR_SYSTEMS', 3); // Default number of solar systems per galaxy
 define('DEFAULT_NUM_PLANETS', 8); // Default number of planets per solar system
 define('DB_HOST', 'localhost');

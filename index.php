@@ -66,18 +66,18 @@ if(!$s->loggedIn || $_GET['logout'])
 ?>
 <div id="mainDisplay">
     <?php
-    $universe = $s->universe; // Use the universe instance from the Game class
-    foreach ($universe->getGalaxies() as $galaxyData) {
-        echo "<h3>" . $galaxyData['name'] . "</h3>";
-        foreach ($galaxyData['solarSystems'] as $solarSystemData) {
-            echo "<h4>Solar System: " . $solarSystemData['name'] . "</h4>";
-            foreach ($solarSystemData['planets'] as $planetData) {
-                echo "<p>Planet: " . $planetData['name'] . " - Type: " . $planetData['type'] . "</p>";
-            }
-            foreach ($solarSystemData['interstellarObjects'] as $objectData) {
-                echo "<p>Interstellar Object: " . $objectData['name'] . " - Type: " . $objectData['type'] . "</p>";
-            }
-        }
+    // Display current resources
+    $resources = $s->resources->getResources();
+    echo "<h3>Current Resources</h3>";
+    echo "<p>Metal: " . $resources['metal'] . "</p>";
+    echo "<p>Crystal: " . $resources['crystal'] . "</p>";
+    echo "<p>Deuterium: " . $resources['deuterium'] . "</p>";
+
+    // Display research options and progress
+    echo "<h3>Research Progress</h3>";
+    $research = $s->research;
+    foreach ($research->getCompletedTechnologies() as $technology) {
+        echo "<p>Completed Technology: " . $technology . "</p>";
     }
     ?>
 </div>
