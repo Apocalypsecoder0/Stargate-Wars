@@ -1,4 +1,5 @@
-<?
+<?php
+include_once("Universe.class.php");
 // Base::Game.class.php
 
 class Game extends User
@@ -14,6 +15,13 @@ class Game extends User
 	var $uid; 			//UserID
 	var $rid;			//Race Identifier
 	var $fields;		//field List
+	var $universe;      //Universe instance
+
+	function __construct()
+	{
+		parent::__construct();
+		$this->universe = new Universe();
+	}
 
 	function nextTurn()
 	{

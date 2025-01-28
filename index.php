@@ -66,11 +66,17 @@ if(!$s->loggedIn || $_GET['logout'])
 ?>
 <div id="mainDisplay">
     <?php
-    $universe = new Universe();
+    $universe = $s->universe; // Use the universe instance from the Game class
     foreach ($universe->getGalaxies() as $galaxyData) {
         echo "<h3>" . $galaxyData['name'] . "</h3>";
-        foreach ($galaxyData['planets'] as $planetData) {
-            echo "<p>Planet: " . $planetData['name'] . " - Type: " . $planetData['type'] . " - Moons: " . $planetData['moons'] . "</p>";
+        foreach ($galaxyData['solarSystems'] as $solarSystemData) {
+            echo "<h4>Solar System: " . $solarSystemData['name'] . "</h4>";
+            foreach ($solarSystemData['planets'] as $planetData) {
+                echo "<p>Planet: " . $planetData['name'] . " - Type: " . $planetData['type'] . "</p>";
+            }
+            foreach ($solarSystemData['interstellarObjects'] as $objectData) {
+                echo "<p>Interstellar Object: " . $objectData['name'] . " - Type: " . $objectData['type'] . "</p>";
+            }
         }
     }
     ?>
