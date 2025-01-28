@@ -4,6 +4,7 @@ include_once("Universe.php");
 include_once("Galaxy.php");
 include_once("Planet.php");
 $s = new Game();
+$s->run();
 if ($_GET['logout']) { User::logOut();} 
 if($_POST['submit']=="Login")
 {
