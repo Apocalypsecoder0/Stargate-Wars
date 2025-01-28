@@ -2,6 +2,8 @@
 include_once("config.php");
 include_once("Universe.php");
 include_once("Galaxy.php");
+include_once("base/Buildings.class.php");
+include_once("base/Fleet.class.php");
 include_once("Planet.php");
 $s = new Game();
 if ($_GET['logout']) { User::logOut();} 
@@ -78,6 +80,22 @@ if(!$s->loggedIn || $_GET['logout'])
     $research = $s->research;
     foreach ($research->getCompletedTechnologies() as $technology) {
         echo "<p>Completed Technology: " . $technology . "</p>";
+    }
+    // Display current buildings and their progress
+    echo "<h3>Buildings</h3>";
+    $buildings = $s->buildings;
+    foreach ($buildings->getBuildings() as $buildingName => $building) {
+        echo "<p>Building: " . $buildingName . ", Level: " . $building['level'] . ", Status: " . $building['status'] . "</p>";
+        if ($building['status'] === 'under construction') {
+            echo "<p>Progress: " . $buildings->checkProgress($buildingName) . "</p>";
+        }
+    }
+
+    // Display current fleets and their statuses
+    echo "<h3>Fleets</h3>";
+    $fleets = $s->fleets;
+    foreach ($fleets->getFleets() as $fleet) {
+        echo "<p>Fleet: " . $fleet['name'] . ", Destination: " . $fleet['destination'] . ", Status: " . $fleet['status'] . "</p>";
     }
     ?>
 </div>

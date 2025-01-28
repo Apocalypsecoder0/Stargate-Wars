@@ -2,6 +2,8 @@
 include_once("Universe.class.php");
 include_once("Resources.class.php");
 include_once("Research.class.php");
+include_once("base/Buildings.class.php");
+include_once("base/Fleet.class.php");
 // Base::Game.class.php
 
 class Game extends User
@@ -20,6 +22,8 @@ class Game extends User
 	var $universe;      //Universe instance
 	var $resources;     //Resources instance
 	var $research;      //Research instance
+	var $buildings;     //Buildings instance
+	var $fleets;        //Fleets instance
 
 	function __construct()
 	{
@@ -27,6 +31,8 @@ class Game extends User
 		$this->universe = new Universe();
 		$this->resources = new Resources();
 		$this->research = new Research();
+		$this->buildings = new Buildings();
+		$this->fleets = new Fleet();
 	}
 
 	function nextTurn()
