@@ -28,13 +28,15 @@ if(!$s->loggedIn || $_GET['logout'])
 <meta http-equiv="pics-Label" content='(pics-1.1 "http://www.icra.org/pics/vocabularyv03/" l gen true for "http://codenamelantea.com" r (n 0 s 0 v 0 l 2 oa 0 ob 0 oc 0 od 0 oe 0 of 0 og 0 oh 0 c 3) gen true for "http://www.codenamelantea.com" r (n 0 s 0 v 0 l 2 oa 0 ob 0 oc 0 od 0 oe 0 of 0 og 0 oh 0 c 3))' />
 		<title>Codename: Lantea</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<LINK REL=STYLESHEET TYPE='text/css' HREF='main.css' />
+<link rel="stylesheet" type="text/css" href="styles/main.css" />
+<link rel="stylesheet" type="text/css" href="styles/responsive.css" />
 </head>
 
-<body background="images/stars.jpg" onLoad="mainUpdate('login','Login'); MM_preloadImages('images/galaxy1-2.jpg','images/galaxy2-2.jpg'); autoclear(); bb_init('divBody', false); ogameInit();">
+<body style="background-image: url('images/stars.jpg');" onload="mainUpdate('login','Login'); MM_preloadImages('images/galaxy1-2.jpg','images/galaxy2-2.jpg'); autoclear(); bb_init('divBody', false); ogameInit();">
 
 <div id="divBody">
-<table border="0">
+<main>
+<section>
   <tr>
     <td colspan="2" align="left" valign="middle"><a href="javascript:void(0)" onClick="mainUpdate('login','Login'); return false" onMouseOver="rollUpDate('Login'); return false" onMouseOut="autoclear(); return false"><img src="images/galaxy1.jpg" name="Image12" width="373" height="188" border="0" id="Image12" onMouseOver="MM_swapImage('Image12','','images/galaxy1-2.jpg',1)" onMouseOut="MM_swapImgRestore()" /></a></td>
     <td colspan="2"></td>
@@ -50,7 +52,7 @@ if(!$s->loggedIn || $_GET['logout'])
         <td height="90%"><div id="up2date"></div></td>
       </tr>
     </table>    </td>
-    <td colspan="3" align="center"><h1>Codename: Lantea</h1><h2><div id="rollover"></div></h2><?
+    <td colspan="3" align="center"><h1>Codename: Lantea</h1><h2><div id="rollover" aria-live="polite"></div></h2><?php
 	if ($_POST['submit']=="Register")
 {
 	$number = $_POST['number'];
@@ -75,7 +77,7 @@ if(!$s->loggedIn || $_GET['logout'])
     }
     ?>
 </div>
-<span id=""> Graphics Done by test</span><br><a href="http://www.icra.org/sitelabel/" target="_blank"><img src="images/icra.gif"></a></td>
+<span id="graphics-credit">Graphics Done by test</span><br><a href="http://www.icra.org/sitelabel/" target="_blank" aria-label="ICRA Site Label"><img src="images/icra.gif" alt="ICRA Label"></a></td>
     <td colspan="2"></td>
   </tr>
   
@@ -87,8 +89,10 @@ if(!$s->loggedIn || $_GET['logout'])
     </td>
     <td colspan="3"></td>
   </tr>
-</table>
+</section>
+</main>
 </div>
+<script src="js/responsive.js"></script>
 </body>
 </html>
 
