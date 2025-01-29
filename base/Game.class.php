@@ -60,7 +60,9 @@ class Game extends User
 	
 	function messageCount()
 	{	
-		Debug::printMsg(__CLASS__, __FUNCTION__, "Getting Count of Messages");
+		if (class_exists('Debug') && is_callable(['Debug', 'printMsg'])) {
+			Debug::printMsg(__CLASS__, __FUNCTION__, "Getting Count of Messages");
+		}
 		$query = "SELECT count(`message`) FROM `messages` WHERE `toUID`=".$_SESSION['userid']." LIMIT 1000";
 		$q = $this->query($query);
 		$x = mysql_num_rows($q);
@@ -163,7 +165,9 @@ class Game extends User
 	
 	function getOfficers($uid)
 	{
-		Debug::printMsg(__CLASS__, __FUNCTION__, "Retrieving Officers");
+		if (class_exists('Debug') && is_callable(['Debug', 'printMsg'])) {
+			Debug::printMsg(__CLASS__, __FUNCTION__, "Retrieving Officers");
+		}
 		$query = "SELECT userdata.uid, userdata.uname , race.r_name , rank.overall, (SELECT SUM( units.attack+ units.superAttack+ units.attackMercs+ units.defense+ units.superDefense+ units.defenseMercs+ units.untrained+ units.miners+ units.lifers+ units.covert+ units.superCovert+ units.anticovert+ units.superAnticovert) FROM `units` WHERE uid=".$uid.") AS ttlarmy, (SELECT SUM( units.attackMercs+ units.defenseMercs) FROM `units` WHERE uid=".$uid.") AS mercs
 				  FROM `userdata` , `users` , `race` , `rank`
 				  WHERE userdata.cid =".$uid."
@@ -191,7 +195,9 @@ class Game extends User
 	
 	function Rankings($pnum=1)
 	{
-		Debug::printMsg(__CLASS__, __FUNCTION__, "Retrieving Ranks");
+		if (class_exists('Debug') && is_callable(['Debug', 'printMsg'])) {
+			Debug::printMsg(__CLASS__, __FUNCTION__, "Retrieving Ranks");
+		}
 		$rankings = array();
 		$perpage = 25;
 		$page = array(1, $perpage); // Selects Page
@@ -251,7 +257,9 @@ class Game extends User
 	}
 	function allyRankings($pnum=1,$allyid)
 	{
-		Debug::printMsg(__CLASS__, __FUNCTION__, "Retrieving  alliance Rankings");
+		if (class_exists('Debug') && is_callable(['Debug', 'printMsg'])) {
+			Debug::printMsg(__CLASS__, __FUNCTION__, "Retrieving  alliance Rankings");
+		}
 		$rankings = array();
 		$perpage = 25;
 		$page = array(1, $perpage); // Selects Page
@@ -314,8 +322,10 @@ class Game extends User
 	}
 	function getallyinfo($allyid)
 	{
-	Debug::printMsg(__CLASS__, __FUNCTION__, "Retrieving  alliance info");
-		$query = "SELECT *
+	if (class_exists('Debug') && is_callable(['Debug', 'printMsg'])) {
+		Debug::printMsg(__CLASS__, __FUNCTION__, "Retrieving  alliance info");
+	}
+	$query = "SELECT *
 					FROM alliances
 					WHERE alliances.allyid = ".$allyid." 
 					LIMIT 1";
@@ -376,7 +386,9 @@ class Game extends User
 	
 	function getWeapons()
 	{
-		Debug::printMsg(__CLASS__, __FUNCTION__, "Retrieving Weapons Currently buyable by player");
+		if (class_exists('Debug') && is_callable(['Debug', 'printMsg'])) {
+			Debug::printMsg(__CLASS__, __FUNCTION__, "Retrieving Weapons Currently buyable by player");
+		}
 		$query = "SELECT `isDefense`,`cash_cost`,`unit_cost`,`weaponName`,`weaponPower`,`wid`
 		          FROM `armory`
 				  WHERE armory.rid = ".$_SESSION['raceID']."
@@ -413,7 +425,9 @@ class Game extends User
 	
 	function getWeaponInventory($uid)
 	{
-		Debug::printMsg(__CLASS__, __FUNCTION__, "Retrieving UserID($uid) Weapon Inventory");
+		if (class_exists('Debug') && is_callable(['Debug', 'printMsg'])) {
+			Debug::printMsg(__CLASS__, __FUNCTION__, "Retrieving UserID($uid) Weapon Inventory");
+		}
 		$weapons = array (); //3d Array for Defense and ATtack Weapons
 		$defCounter = 0;
 		$atkCounter = 0;
@@ -457,7 +471,9 @@ class Game extends User
 	
 	function updatePower($uid)
 	{
-		Debug::printMsg(__CLASS__, __FUNCTION__, "Updating User Power Totals");		
+		if (class_exists('Debug') && is_callable(['Debug', 'printMsg'])) {
+			Debug::printMsg(__CLASS__, __FUNCTION__, "Updating User Power Totals");
+		}
 		$query = "SELECT rid FROM userdata WHERE uid=$uid LIMIT 1";
 		$q=$this->query($query);
 		$fetched = mysql_fetch_object($q);
@@ -709,7 +725,9 @@ class Game extends User
 
 	function buyWeapons($data)
 	{
-		Debug::printMsg(__CLASS__, __FUNCTION__, "buying Weapons");
+		if (class_exists('Debug') && is_callable(['Debug', 'printMsg'])) {
+			Debug::printMsg(__CLASS__, __FUNCTION__, "buying Weapons");
+		}
 		$weapons = $this->getWeapons();
 		$cashcost = 0;
 		$unitcost = 0;
@@ -803,7 +821,9 @@ class Game extends User
 	
 	function trainUnits($atk,$uberAtk,$def,$uberDef,$miners,$cov,$uberCov,$anti,$uberAnti)
 	{
-		Debug::printMsg(__CLASS__, __FUNCTION__, "Training Units");
+		if (class_exists('Debug') && is_callable(['Debug', 'printMsg'])) {
+			Debug::printMsg(__CLASS__, __FUNCTION__, "Training Units");
+		}
 		$this->autoLoad();
 		$trn = $this->getPersonnel($_SESSION['userid']);
 		$cashcost = (float)($atk*$trn->attackCost)+
@@ -930,7 +950,9 @@ $atk = 0;$uberAtk=0;$def=0;$uberDef=0;$miners=0;$cov=0;$uberCov=0;$anti=0;$uberA
 	
 	function untrainUnits($atk,$def,$cov,$anti,$min)
 	{
-		Debug::printMsg(__CLASS__, __FUNCTION__, "Resigning Units");
+		if (class_exists('Debug') && is_callable(['Debug', 'printMsg'])) {
+			Debug::printMsg(__CLASS__, __FUNCTION__, "Resigning Units");
+		}
 		$trn = $this->getPersonnel($_SESSION['userid']);
 		$atkavail = $trn->attackCount;
 		$defavail = $trn->defenseCount;
@@ -970,7 +992,9 @@ $atk = 0;$def=0;$min=0;$cov=0;$anti=0;
 	{
 		if ($turns == 0||!$uid > 0) { exit; }
 		if($uid == $_SESSION['userid']) { echo "Can't Attack Ones Self"; exit; }
-		Debug::printMsg(__CLASS__, __FUNCTION__, "Attacking $uid.");
+		if (class_exists('Debug') && is_callable(['Debug', 'printMsg'])) {
+			Debug::printMsg(__CLASS__, __FUNCTION__, "Attacking $uid.");
+		}
 		$time = date("H:i:s");
 		$str = "";
 		$query = "SELECT
@@ -1304,7 +1328,9 @@ $atkr = "$data->atkrName Sent:<br>  $data->superAnticovert $data->superAnticover
 	
 	function percs($val1, $val2)
 	{
-		Debug::printMsg(__CLASS__, __FUNCTION__, "Getting Weapon Damage Percentages.");
+		if (class_exists('Debug') && is_callable(['Debug', 'printMsg'])) {
+			Debug::printMsg(__CLASS__, __FUNCTION__, "Getting Weapon Damage Percentages.");
+		}
 		if($val2 == 0 || $val1 == 0){
 			$power = 0;
 		}elseif($val1<=.01*$val2){
